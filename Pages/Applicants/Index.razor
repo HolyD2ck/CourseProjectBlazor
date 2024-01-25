@@ -59,6 +59,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        _context.GetData();
         applicants = await _context.Applicant.ToListAsync();
+      
     }
 }

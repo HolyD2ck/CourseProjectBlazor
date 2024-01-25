@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\img\applicants\" />
     <Folder Include="wwwroot\java\" />
   </ItemGroup>

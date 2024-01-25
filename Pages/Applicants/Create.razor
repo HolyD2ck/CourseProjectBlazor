@@ -80,7 +80,6 @@
         {
             _context.Applicant.Add(newApplicant);
             await _context.SaveChangesAsync();
-
             NavigationManager.NavigateTo("/Applicants/Index");
         }
         else
@@ -88,4 +87,5 @@
             Console.WriteLine("Ошибка, Исправляй!");
         }
     }
+
 }
