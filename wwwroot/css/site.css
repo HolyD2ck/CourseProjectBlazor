@@ -136,6 +136,7 @@ img.db {
     border-radius: 5px;
 }
 
+
 .co {
     display: flex;
     justify-content: space-between;
@@ -203,10 +204,12 @@ img.about {
         object-fit: cover;
     }
 .img-fluid {
-    max-width: 70%;
-    height: auto;
-    object-fit: cover;
+    max-width: 650px;
+    max-height: 400px;
+    object-fit:fill;
     display: block;
+    margin-left:23%;
+    
 }
 
 h2, p {

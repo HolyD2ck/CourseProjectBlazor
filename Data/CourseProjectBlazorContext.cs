@@ -45,7 +45,7 @@ public class CourseProjectBlazorContext : DbContext
 
         return Path.Combine("img", "applicants", Path.GetFileName(sourceFile));
     }
-
+    
     public List<Applicant> ApplicantInfo()
     {
         List<string> lines = File.ReadAllLines("..\\CourseProjectBlazor\\wwwroot\\Base\\applicants.csv").ToList();
