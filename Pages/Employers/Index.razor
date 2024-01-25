@@ -1,0 +1,65 @@
+﻿@page "/Employers/Index"
+@using CourseProjectBlazor.Models
+@inject CourseProjectBlazorContext _context
+@using Microsoft.EntityFrameworkCore
+@inject NavigationManager NavigationManager
+
+<h1 class="t">Список Работадателей</h1>
+<br />
+@if (employers == null)
+{
+    <p><em>Загрузка...</em></p>
+}
+else
+{
+    <NavLink class="nav-link" href="/Employers/Create">
+        <span class="oi oi-plus" aria-hidden="true"></span> Добавить Работадателя
+    </NavLink>
+    <br>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Организация</th>
+                <th>Дата Основания</th>
+                <th>Вакансия</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th>Фото</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employer in employers)
+            {
+                <tr>
+                    <td>@employer.Фамилия</td>
+                    <td>@employer.Имя</td>
+                    <td>@employer.Отчество</td>
+                    <td>@employer.Организация</td>
+                    <td>@employer.Дата_Основания.Date.ToString("d")</td>
+                    <td>@employer.Вакансия</td>
+                    <td>@employer.Телефон</td>
+                    <td>@employer.Email</td>
+                    <td><img class="db" src="@employer.Фото" alt="Фото работодателя" /></td>
+                    <td>
+                        <NavLink href="@($"Employers/Edit/{employer.id}")">Изменить</NavLink> |
+                        <NavLink href="@($"Employers/Delete/{employer.id}")">Удалить</NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Employer>? employers;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        employers = await _context.Employer.ToListAsync();
+    }
+}

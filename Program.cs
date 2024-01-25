@@ -1,11 +1,15 @@
-using CourseProjectBlazor.Data;
+﻿using CourseProjectBlazor.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<CourseProjectBlazorContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CourseProjectBlazorContext") ?? throw new InvalidOperationException("Connection string 'CourseProjectBlazorContext' not found.")));
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 

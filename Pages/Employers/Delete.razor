@@ -1,0 +1,43 @@
+﻿@page "/Employers/Delete/{id:int}"
+@using CourseProjectBlazor.Models
+@inject CourseProjectBlazorContext _context
+@using Microsoft.EntityFrameworkCore
+@inject NavigationManager NavigationManager
+
+<h1 class="t">Вы уверены, что хотите удалить этого преподавателя?</h1>
+<button class="btn btn-danger" @onclick="HandleValidSubmit">Удалить</button>
+<button class="btn btn-info" @onclick="Back">Назад</button>
+
+@code
+{
+    [Parameter]
+    public int id { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        var Employer = await _context.Employer.FirstOrDefaultAsync(m => m.id == id);
+
+        if (Employer != null)
+        {
+            _context.Employer.Remove(Employer);
+            await _context.SaveChangesAsync();
+        }
+
+        NavigationManager.NavigateTo("/Employers/Index");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var Employer = await _context.Employer.FirstOrDefaultAsync(m => m.id == id);
+        if (Employer == null)
+        {
+            NavigationManager.NavigateTo("/Employers/Index");
+        }
+    }
+    public void Back()
+    {
+
+        NavigationManager.NavigateTo("/Employers/Index");
+    }
+}
