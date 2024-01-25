@@ -1,0 +1,64 @@
+﻿@page "/Applicants/Index"
+@using CourseProjectBlazor.Models
+@inject CourseProjectBlazorContext _context
+@using Microsoft.EntityFrameworkCore
+@inject NavigationManager NavigationManager
+
+<h1 class="t">Список Соискателей</h1>
+<br />
+@if (applicants == null)
+{
+    <p><em>Загрузка...</em></p>
+}
+else
+{
+    <NavLink class="nav-link" href="/Applicants/Create">
+        <span class="oi oi-plus" aria-hidden="true"></span> Добавить Соискателя
+    </NavLink>
+    <br>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Образование</th>
+                <th>Специальность</th>
+                <th>Дата Рождения</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th>Фото</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var applicant in applicants)
+            {
+                <tr>
+                    <td>@applicant.Фамилия</td>
+                    <td>@applicant.Имя</td>
+                    <td>@applicant.Отчество</td>
+                    <td>@applicant.Образование</td>
+                    <td>@applicant.Специальность</td>
+                    <td>@applicant.Дата_Рождения.Date.ToString("d")</td>
+                    <td>@applicant.Телефон</td>
+                    <td>@applicant.Email</td>
+                    <td><img class="db" src="@applicant.Фото" alt="Фото соискателя" /></td>
+                    <td>
+                        <NavLink href="@($"Applicants/Edit/{applicant.id}")">Изменить</NavLink> |
+                        <NavLink href="@($"Applicants/Delete/{applicant.id}")">Удалить</NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Applicant>? applicants;
+
+    protected override async Task OnInitializedAsync()
+    {
+        applicants = await _context.Applicant.ToListAsync();
+    }
+}

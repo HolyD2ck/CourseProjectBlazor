@@ -1,48 +1,48 @@
-﻿@page "/Employers/Create"
+﻿@page "/Applicants/Create"
 @using CourseProjectBlazor.Models
 @inject CourseProjectBlazorContext _context
 @using Microsoft.EntityFrameworkCore
 @inject NavigationManager NavigationManager
 @inject IWebHostEnvironment _env
 
-<h1 class="t">Внести Работадателя</h1>
+<h1 class="t">Внести Соискателя</h1>
 <br />
-<EditForm Model="newEmployer" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="newApplicant" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="surname" class="control-label">Фамилия</label>
-                <InputText id="surname" @bind-Value="newEmployer.Фамилия" />
+                <InputText id="surname" @bind-Value="newApplicant.Фамилия" />
             </div>
             <div class="form-group">
                 <label for="name" class="control-label">Имя</label>
-                <InputText id="name" @bind-Value="newEmployer.Имя" />
+                <InputText id="name" @bind-Value="newApplicant.Имя" />
             </div>
             <div class="form-group">
                 <label for="patronymic" class="control-label">Отчество</label>
-                <InputText id="patronymic" @bind-Value="newEmployer.Отчество" />
+                <InputText id="patronymic" @bind-Value="newApplicant.Отчество" />
             </div>
             <div class="form-group">
-                <label for="organization" class="control-label">Организация</label>
-                <InputText id="organization" @bind-Value="newEmployer.Организация" />
+                <label for="education" class="control-label">Образование</label>
+                <InputText id="education" @bind-Value="newApplicant.Образование" />
             </div>
             <div class="form-group">
-                <label for="foundationDate" class="control-label">Дата Основания</label>
-                <InputDate id="foundationDate" @bind-Value="newEmployer.Дата_Основания" />
+                <label for="specialty" class="control-label">Специальность</label>
+                <InputText id="specialty" @bind-Value="newApplicant.Специальность" />
             </div>
             <div class="form-group">
-                <label for="vacancy" class="control-label">Вакансия</label>
-                <InputText id="vacancy" @bind-Value="newEmployer.Вакансия" />
+                <label for="birthdate" class="control-label">Дата Рождения</label>
+                <InputDate id="birthdate" @bind-Value="newApplicant.Дата_Рождения" />
             </div>
             <div class="form-group">
                 <label for="phone" class="control-label">Телефон</label>
-                <InputText id="phone" @bind-Value="newEmployer.Телефон" />
+                <InputText id="phone" @bind-Value="newApplicant.Телефон" />
             </div>
             <div class="form-group">
                 <label for="email" class="control-label">Email</label>
-                <InputText id="email" @bind-Value="newEmployer.Email" />
+                <InputText id="email" @bind-Value="newApplicant.Email" />
             </div>
             <div class="form-group">
                 <label for="photo" class="control-label">Фото (менее 500кб)</label>
@@ -50,11 +50,11 @@
             </div>
             <div class="form-group">
                 <br />
-                <button type="submit">Добавить преподавателя</button>
+                <button type="submit">Добавить соискателя</button>
             </div>
             <br />
             <div class="form-group">
-                <NavLink class="nav-link" href="/Employers/Index">
+                <NavLink class="nav-link" href="/Applicants/Index">
                     <span class="oi oi-minus" aria-hidden="true"></span> Вернуться к Просмотру
                 </NavLink>
             </div>
@@ -62,26 +62,26 @@
     </div>
 </EditForm>
 @code {
-    private Employer newEmployer = new Employer();
+    private Applicant newApplicant = new Applicant();
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
-        var path = Path.Combine(_env.WebRootPath, "img/employers", e.File.Name);
+        var path = Path.Combine(_env.WebRootPath, "img/applicants", e.File.Name);
         using (var stream = new FileStream(path, FileMode.Create))
         {
             await e.File.OpenReadStream().CopyToAsync(stream);
         }
-        newEmployer.Фото = Path.Combine("img/employers", e.File.Name);
+        newApplicant.Фото = Path.Combine("img/applicants", e.File.Name);
     }
 
     private async Task HandleValidSubmit()
     {
-        if (!string.IsNullOrEmpty(newEmployer.Фото))
+        if (!string.IsNullOrEmpty(newApplicant.Фото))
         {
-            _context.Employer.Add(newEmployer);
+            _context.Applicant.Add(newApplicant);
             await _context.SaveChangesAsync();
 
-            NavigationManager.NavigateTo("/Employers/Index");
+            NavigationManager.NavigateTo("/Applicants/Index");
         }
         else
         {
@@ -89,5 +89,3 @@
         }
     }
 }
-
-

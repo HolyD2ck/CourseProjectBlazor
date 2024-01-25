@@ -1,0 +1,43 @@
+﻿@page "/Applicants/Delete/{id:int}"
+@using CourseProjectBlazor.Models
+@inject CourseProjectBlazorContext _context
+@using Microsoft.EntityFrameworkCore
+@inject NavigationManager NavigationManager
+
+<h1 class="t">Вы уверены, что хотите удалить этого соискателя?</h1>
+<button class="btn btn-danger" @onclick="HandleValidSubmit">Удалить</button>
+<button class="btn btn-info" @onclick="Back">Назад</button>
+
+@code
+{
+    [Parameter]
+    public int id { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        var Applicant = await _context.Applicant.FirstOrDefaultAsync(m => m.id == id);
+
+        if (Applicant != null)
+        {
+            _context.Applicant.Remove(Applicant);
+            await _context.SaveChangesAsync();
+        }
+
+        NavigationManager.NavigateTo("/Applicants/Index");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var Applicant = await _context.Applicant.FirstOrDefaultAsync(m => m.id == id);
+        if (Applicant == null)
+        {
+            NavigationManager.NavigateTo("/Applicants/Index");
+        }
+    }
+    public void Back()
+    {
+
+        NavigationManager.NavigateTo("/Applicants/Index");
+    }
+}
