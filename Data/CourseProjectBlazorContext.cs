@@ -28,6 +28,15 @@ public class CourseProjectBlazorContext : DbContext
             SaveChanges();
         }
     }
+    public void GetData2()
+    {
+        if (!Employer.Any())
+        {
+            var data2 = EmployerInfo();
+            Employer.AddRange(data2);
+            SaveChanges();
+        }
+    }
     public int Random()
     {
         return rd.Next(0,20);
@@ -45,7 +54,20 @@ public class CourseProjectBlazorContext : DbContext
 
         return Path.Combine("img", "applicants", Path.GetFileName(sourceFile));
     }
-    
+    public string GetPhoto2()
+    {
+        int random = Random();
+        string sourceFolderPath = "..\\CourseProjectBlazor\\wwwroot\\ga";
+        string targetFolderPath = "..\\CourseProjectBlazor\\wwwroot\\img\\employers";
+        string[] files = Directory.GetFiles(sourceFolderPath);
+        string sourceFile = files[random];
+        string targetFile = Path.Combine(targetFolderPath, Path.GetFileName(sourceFile));
+
+        File.Copy(sourceFile, targetFile, true);
+
+        return Path.Combine("img", "applicants", Path.GetFileName(sourceFile));
+    }
+
     public List<Applicant> ApplicantInfo()
     {
         List<string> lines = File.ReadAllLines("..\\CourseProjectBlazor\\wwwroot\\Base\\applicants.csv").ToList();
@@ -70,5 +92,30 @@ public class CourseProjectBlazorContext : DbContext
             Applicant.Add(applicant);
         }
         return Applicant;
+    }
+    public List<Employer> EmployerInfo()
+    {
+        List<string> lines = File.ReadAllLines("..\\CourseProjectBlazor\\wwwroot\\Base\\employers.csv").ToList();
+        var Employer = new List<Employer>();
+
+        foreach (var line in lines)
+        {
+            var photo = GetPhoto2();
+            string[] spl = line.Split(';');
+            var employer = new Employer
+            {
+                Фамилия = spl[0],
+                Имя = spl[1],
+                Отчество = spl[2],
+                Организация = spl[3],
+                Дата_Основания =Convert.ToDateTime(spl[4]),
+                Вакансия = spl[5],
+                Телефон = spl[6],
+                Email = spl[7],
+                Фото = photo
+            };
+            Employer.Add(employer);
+        }
+        return Employer;
     }
 }

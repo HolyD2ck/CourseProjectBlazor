@@ -59,7 +59,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-
+        _context.GetData2();
         employers = await _context.Employer.ToListAsync();
     }
 }
