@@ -23,7 +23,7 @@
             await _context.SaveChangesAsync();
         }
 
-        NavigationManager.NavigateTo("/Employers/Index");
+        NavigationManager.NavigateTo("Employers/Index");
     }
 
     protected override async Task OnInitializedAsync()
@@ -32,12 +32,12 @@
         var Employer = await _context.Employer.FirstOrDefaultAsync(m => m.id == id);
         if (Employer == null)
         {
-            NavigationManager.NavigateTo("/Employers/Index");
+            NavigationManager.NavigateTo("Employers/Index");
         }
     }
     public void Back()
     {
 
-        NavigationManager.NavigateTo("/Employers/Index");
+        NavigationManager.NavigateTo("Employers/Index");
     }
 }

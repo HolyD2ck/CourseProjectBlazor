@@ -54,7 +54,7 @@
             </div>
             <br />
             <div class="form-group">
-                <NavLink class="nav-link" href="/Applicants/Index">
+                <NavLink class="nav-link" href="Applicants/Index">
                     <span class="oi oi-minus" aria-hidden="true"></span> Вернуться к Просмотру
                 </NavLink>
             </div>
@@ -80,7 +80,7 @@
         {
             _context.Applicant.Add(newApplicant);
             await _context.SaveChangesAsync();
-            NavigationManager.NavigateTo("/Applicants/Index");
+            NavigationManager.NavigateTo("Applicants/Index");
         }
         else
         {

@@ -75,7 +75,7 @@ else
         employer = await _context.Employer.FirstOrDefaultAsync(m => m.id == id);
         if (employer == null)
         {
-            NavigationManager.NavigateTo("/Employers/Index");
+            NavigationManager.NavigateTo("Employers/Index");
         }
     }
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
@@ -92,11 +92,11 @@ else
     {
         _context.Employer.Update(employer);
         await _context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/Employers/Index");
+        NavigationManager.NavigateTo("Employers/Index");
     }
 
     private void Back()
     {
-        NavigationManager.NavigateTo("/Employers/Index");
+        NavigationManager.NavigateTo("Employers/Index");
     }
 }

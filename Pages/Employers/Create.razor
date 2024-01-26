@@ -54,7 +54,7 @@
             </div>
             <br />
             <div class="form-group">
-                <NavLink class="nav-link" href="/Employers/Index">
+                <NavLink class="nav-link" href="Employers/Index">
                     <span class="oi oi-minus" aria-hidden="true"></span> Вернуться к Просмотру
                 </NavLink>
             </div>
@@ -81,7 +81,7 @@
             _context.Employer.Add(newEmployer);
             await _context.SaveChangesAsync();
 
-            NavigationManager.NavigateTo("/Employers/Index");
+            NavigationManager.NavigateTo("Employers/Index");
         }
         else
         {

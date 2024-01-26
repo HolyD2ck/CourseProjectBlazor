@@ -75,7 +75,7 @@ else
         applicant = await _context.Applicant.FirstOrDefaultAsync(m => m.id == id);
         if (applicant == null)
         {
-            NavigationManager.NavigateTo("/Applicants/Index");
+            NavigationManager.NavigateTo("Applicants/Index");
         }
     }
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
@@ -92,7 +92,7 @@ else
     {
         _context.Applicant.Update(applicant);
         await _context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/Applicants/Index");
+        NavigationManager.NavigateTo("Applicants/Index");
     }
 
     private void Back()
