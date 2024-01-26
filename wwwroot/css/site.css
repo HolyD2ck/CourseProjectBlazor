@@ -115,7 +115,7 @@ h1, h2 {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
         border-radius: 50px;
-        background-color: #f2f2f2;
+        background-color: lightgray;
     }
 
         .contact div:hover {
@@ -149,7 +149,7 @@ img.db {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
         border-radius: 50px;
-        background-color: #f2f2f2;
+        background-color: lightgray;
     }
 
         .co div:hover {
@@ -177,7 +177,7 @@ img.ab {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
         border-radius: 5px;
-        background-color: #f2f2f2;
+        background-color: lightgray;
         text-align: left;
         display: flex;
         align-items: center;
@@ -203,13 +203,18 @@ img.about {
         height: auto;
         object-fit: cover;
     }
-.img-fluid {
-    max-width: 650px;
-    max-height: 400px;
-    object-fit:fill;
-    display: block;
-    margin-left:23%;
+
+.my-carousel .carousel-item  {
+display:flex;
+max-height:300px;
     
+}
+.modal-body img {
+    max-width: auto;
+    max-height: 500px;
+}
+.my-carousel .carousel-item img {
+object-fit:cover;
 }
 
 h2, p {
